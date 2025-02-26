@@ -164,7 +164,7 @@ export default function TransactionsTable() {
           <h2 className="mt-6 text-[#111827] text-lg font-semibold">
             Transactions
           </h2>
-          <div className="mt-4 space-y-4 h-[500px] overflow-y-auto   rounded-lg  ">
+          <div className="mt-4 space-y-4 h-[600px] overflow-y-auto   rounded-lg  ">
             {loading ? (
               <Loading />
             ) : (
