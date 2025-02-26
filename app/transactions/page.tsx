@@ -6,7 +6,7 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { VscCloudDownload } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/store";
 import { fetchTransactions } from "@/features/transactionsSlice";
 import Loading from "@/components/Loader";
 interface Transaction {
@@ -18,8 +18,8 @@ interface Transaction {
   status: string;
 }
 export default function TransactionsTable() {
-  const [dateRange, setDateRange] = useState("June 6, 2023 - Jun 15, 2025");
-  const dispatch = useDispatch();
+  // const [dateRange, setDateRange] = useState("June 6, 2023 - Jun 15, 2025");
+  const dispatch = useDispatch<AppDispatch>();
   const { data: transactions = [], loading } = useSelector(
     (state: RootState) => state.transactions || { data: [] }
   ) as { data: Transaction[]; loading: boolean };
@@ -151,13 +151,12 @@ export default function TransactionsTable() {
             </button>
           </div>
 
-  
           <div className="mt-4">
             <label className="text-sm font-medium text-gray-700">
               Select Date Range:
             </label>
             <button className="w-full text-[#71717A] flex items-center justify-between mt-1 border px-3 py-2 rounded-md text-sm">
-              {dateRange}
+              June 6, 2023 - Jun 15, 2025
               <IoChevronDown size={16} />
             </button>
           </div>
