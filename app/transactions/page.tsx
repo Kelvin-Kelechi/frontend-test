@@ -21,8 +21,8 @@ export default function TransactionsTable() {
   // const [dateRange, setDateRange] = useState("June 6, 2023 - Jun 15, 2025");
   const dispatch = useDispatch<AppDispatch>();
   const { data: transactions = [], loading } = useSelector(
-    (state: RootState) => state.transactions || { data: [] }
-  ) as { data: Transaction[]; loading: boolean };
+    (state: RootState) => state.transactions
+  ) as unknown as { data: Transaction[]; loading: boolean };  
 
   const [isMobile, setIsMobile] = useState(false);
 

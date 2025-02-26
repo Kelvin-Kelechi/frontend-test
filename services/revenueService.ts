@@ -1,4 +1,4 @@
-export const fetchMockRevenue = async () => {
+export const fetchMockRevenue = async (): Promise<RevenueData[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([
@@ -18,3 +18,8 @@ export const fetchMockRevenue = async () => {
     }, 1000);
   });
 };
+
+interface RevenueData {
+  name: string;
+  value: number;
+}

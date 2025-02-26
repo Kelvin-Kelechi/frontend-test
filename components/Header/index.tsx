@@ -1,33 +1,38 @@
 "use client";
-
 import { useState } from "react";
-import { Bell, ChevronDown, Menu, X } from "lucide-react";
+import { FiBell } from "react-icons/fi";
+import { MdClose } from "react-icons/md";
+import { IoChevronDown, IoMenu } from "react-icons/io5";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import fundR from "/public/images/fundR.png";
 import Link from "next/link";
-import {
-  Globe,
-  LayoutDashboard,
-  Wallet,
-  Repeat,
-  FileText,
-  Settings,
-} from "lucide-react";
-
+import { CiGlobe } from "react-icons/ci";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { IoWalletOutline } from "react-icons/io5";
+import { LuRepeat } from "react-icons/lu";
+import { BsFileText } from "react-icons/bs";
+import { IoSettingsOutline } from "react-icons/io5";
 const menuItems = [
-  { name: "Get Started", icon: <Globe size={20} />, href: "/" },
+  { name: "Get Started", icon: <CiGlobe size={20} />, href: "/" },
   {
     name: "Dashboard",
-    icon: <LayoutDashboard size={20} />,
+    icon: <LuLayoutDashboard size={20} />,
     href: "/dashboard",
   },
-  { name: "Accounts", icon: <Wallet size={20} />, href: "/accounts" },
-  { name: "Transfers", icon: <Repeat size={20} />, href: "/transfers" },
-  { name: "Transactions", icon: <FileText size={20} />, href: "/transactions" },
-  { name: "Settings", icon: <Settings size={20} />, href: "/settings" },
+  { name: "Accounts", icon: <IoWalletOutline size={20} />, href: "/accounts" },
+  { name: "Transfers", icon: <LuRepeat size={20} />, href: "/transfers" },
+  {
+    name: "Transactions",
+    icon: <BsFileText size={20} />,
+    href: "/transactions",
+  },
+  {
+    name: "Settings",
+    icon: <IoSettingsOutline size={20} />,
+    href: "/settings",
+  },
 ];
-
 export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const pathname = usePathname();
@@ -36,7 +41,7 @@ export default function Header() {
     <>
       <header className="w-full bg-[#fcfcfc] h-16 flex items-center justify-between px-4 md:px-6 border-b border-gray-200 pt-1 sticky top-0 z-50">
         <div className="md:hidden">
-          <Menu
+          <IoMenu
             className="text-gray-600 cursor-pointer"
             size={24}
             onClick={() => setIsSidebarOpen(true)}
@@ -48,7 +53,7 @@ export default function Header() {
         </div>
 
         <div className="flex items-center space-x-3 md:space-x-4">
-          <Bell
+          <FiBell
             className="text-gray-600 cursor-pointer hover:text-black"
             size={18}
           />
@@ -57,7 +62,10 @@ export default function Header() {
             <div className="w-8 h-8 md:w-10 md:h-10 bg-[#0CBC8B] text-white flex items-center justify-center rounded-full font-bold text-sm md:text-base">
               GA
             </div>
-            <ChevronDown className="text-gray-600 hidden md:block" size={14} />
+            <IoChevronDown
+              className="text-gray-600 hidden md:block"
+              size={14}
+            />
           </div>
         </div>
       </header>
@@ -76,7 +84,7 @@ export default function Header() {
       >
         <div className="flex items-center justify-between p-[19.5px] border-b ">
           <Image src={fundR} alt="FundR Logo" width={90} height={35} />
-          <X
+          <MdClose
             className="text-gray-600 cursor-pointer"
             size={24}
             onClick={() => setIsSidebarOpen(false)}

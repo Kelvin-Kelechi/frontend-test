@@ -2,13 +2,18 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+import configureStore, { MockStoreEnhanced } from "redux-mock-store";
+ // Ensure correct path
 import RevenueChart from "./index";
-
-const mockStore = configureStore([]);
+import { RootState } from "@/redux/store";
+interface RevenueData {
+  name: string;
+  value: number;
+}
+const mockStore = configureStore<RootState>(); // Correctly type the store
 
 describe("RevenueChart Component", () => {
-  let store: any;
+  let store: MockStoreEnhanced<RootState>;
 
   beforeEach(() => {
     store = mockStore({
@@ -17,8 +22,14 @@ describe("RevenueChart Component", () => {
           { name: "Day 1", value: 5000 },
           { name: "Day 2", value: 10000 },
           { name: "Day 3", value: 15000 },
-        ],
+        ] as RevenueData[],
         loading: false,
+        error: null, // Ensure all properties from Redux state are included
+      },
+      transactions: {
+        data: [],
+        loading: false,
+        error: null,
       },
     });
 
@@ -27,7 +38,8 @@ describe("RevenueChart Component", () => {
 
   it("renders the loading state", () => {
     store = mockStore({
-      revenue: { data: [], loading: true },
+      revenue: { data: [], loading: true, error: null },
+      transactions: { data: [], loading: false, error: null },
     });
 
     render(

@@ -1,8 +1,7 @@
-"use client";
 import { fetchMockRevenue } from "@/services/revenueService";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchRevenueData = createAsyncThunk(
+export const fetchRevenueData = createAsyncThunk<RevenueData[]>(
   "revenue/fetchRevenueData",
   async () => {
     const response = await fetchMockRevenue();
@@ -10,12 +9,17 @@ export const fetchRevenueData = createAsyncThunk(
   }
 );
 
+interface RevenueData {
+  name: string;
+  value: number;
+}
+
 const revenueSlice = createSlice({
   name: "revenue",
   initialState: {
-    data: [],
+    data: [] as RevenueData[],
     loading: false,
-    error: null,
+    error: null as string | null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -29,7 +33,7 @@ const revenueSlice = createSlice({
       })
       .addCase(fetchRevenueData.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message || null;
       });
   },
 });

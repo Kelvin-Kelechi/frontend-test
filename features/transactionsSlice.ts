@@ -8,13 +8,19 @@ export const fetchTransactions = createAsyncThunk(
     return response;
   }
 );
+interface Transaction {
+  id: number;
+  amount: number;
+  date: string;
+  status: string;
+}
 
 const transactionsSlice = createSlice({
   name: "transactions",
   initialState: {
-    data: [],
+    data: [] as Transaction[], 
     loading: false,
-    error: null,
+    error: null as string | null | undefined,  
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -24,11 +30,11 @@ const transactionsSlice = createSlice({
       })
       .addCase(fetchTransactions.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = Array.isArray(action.payload) ? action.payload : []; 
+        state.data = Array.isArray(action.payload) ? action.payload : [];
       })
       .addCase(fetchTransactions.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+         state.error = action.error.message || null; 
       });
   },
 });

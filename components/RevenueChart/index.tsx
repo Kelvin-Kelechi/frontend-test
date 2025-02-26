@@ -1,5 +1,5 @@
 import { fetchRevenueData } from "@/features/revenueSlice";
-import { RootState } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,7 +14,7 @@ import {
 import Loading from "../Loader";
 
 const RevenueChart = () => {
-  const dispatch = useDispatch();
+ const dispatch = useDispatch<AppDispatch>();
   const { data, loading } = useSelector((state: RootState) => state.revenue);
   const [selectedPeriod, setSelectedPeriod] = useState("Last 7 days");
   const [isMobile, setIsMobile] = useState(false);
